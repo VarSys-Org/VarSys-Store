@@ -182,7 +182,11 @@ export default function AdminDashboardPage() {
                     release_notes: uploadForm.releaseNotes || null,
                     is_mandatory: uploadForm.isMandatory,
                     released_at: new Date().toISOString(),
-                    is_active: true
+                    is_active: true,
+                    user_id: user?.$id || '',
+                    team_id: '',
+                    team_name: '',
+                    member: '',
                 },
                 [
                     Permission.read(Role.users()),

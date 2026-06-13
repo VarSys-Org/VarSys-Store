@@ -92,7 +92,13 @@ export function AppManagementTab() {
                 config.databaseId,
                 APPS_COLLECTION_ID,
                 app.$id,
-                { is_active: !app.is_active }
+                {
+                    is_active: !app.is_active,
+                    user_id: '',
+                    team_id: '',
+                    team_name: '',
+                    member: '',
+                }
             );
             await loadApps();
             setSuccess(`${app.app_name} ${!app.is_active ? 'enabled' : 'disabled'}`);
@@ -160,7 +166,13 @@ export function AppManagementTab() {
                     config.databaseId,
                     APPS_COLLECTION_ID,
                     editingApp.$id,
-                    formData
+                    {
+                        ...formData,
+                        user_id: '',
+                        team_id: '',
+                        team_name: '',
+                        member: '',
+                    }
                 );
                 setSuccess(`Updated ${formData.app_name}`);
             } else {
@@ -172,7 +184,11 @@ export function AppManagementTab() {
                     {
                         ...formData,
                         is_active: true,
-                        created_at: new Date().toISOString()
+                        created_at: new Date().toISOString(),
+                        user_id: '',
+                        team_id: '',
+                        team_name: '',
+                        member: '',
                     }
                 );
                 setSuccess(`Created ${formData.app_name}`);

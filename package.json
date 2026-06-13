@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "validate-metadata": "node scripts/validate-metadata.cjs",
     "preview": "vite preview"
   },
   "dependencies": {

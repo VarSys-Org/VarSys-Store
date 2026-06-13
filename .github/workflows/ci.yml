@@ -1,0 +1,40 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches: [ main, staging ]
+  push:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Metadata Scoping Validator
+        run: node scripts/validate-metadata.cjs
+
+      - name: Run Typecheck
+        run: |
+          if npm run | grep -q 'typecheck'; then
+            npm run typecheck
+          elif [ -f tsconfig.json ]; then
+            npx tsc --noEmit
+          fi
+
+      - name: Run Linter
+        run: |
+          if npm run | grep -q 'lint'; then
+            npm run lint
+          fi

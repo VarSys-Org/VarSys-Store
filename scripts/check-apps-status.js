@@ -3,7 +3,7 @@ import { Client, Databases, Query } from 'node-appwrite';
 const client = new Client()
     .setEndpoint('https://fra.cloud.appwrite.io/v1')
     .setProject('695215eb000105cdf565')
-    .setKey('standard_6c65af6cb4e7a5ed0811647909fde8b3e46d828a6b95eaf3058d45871886c5064ececae5f9a652adc6b7ec34f5fd542ae9e9a32b441c8b6d237cc35ab61af67037ee29bd030450bb2be6ff87f5046dd40767880bd4cf5fbb6924b3a2a9138947ff0345e295d188f4c36e93194552e8c1c90c4e4aea63fcc10ac37604194ad779');
+    .setKey(process.env.APPWRITE_API_KEY);
 
 const databases = new Databases(client);
 
